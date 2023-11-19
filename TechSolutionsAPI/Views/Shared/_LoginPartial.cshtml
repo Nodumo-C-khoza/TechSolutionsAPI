@@ -1,0 +1,61 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using TechSolutionsAPI.Areas.Identity.Data
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+  
+
+<ul class="navbar-nav">
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+            <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"> <i class="bi bi-person"></i>  @UserManager.GetUserName(User)</a>
+    </li>
+
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-gear"></i> Management
+        </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+            <a class="dropdown-item" asp-controller="UserRoles" asp-action="Index"> <i class="bi bi-person"></i>Role Management</a>
+            <a class="dropdown-item" asp-controller="Admin" asp-action="CreateUserWithAdminRole"> <i class="bi bi-person"></i>Create Admin Account</a>
+            <a class="dropdown-item" asp-controller="Admin" asp-action="ShowCustomer"> <i class="bi bi-person"></i>Show Customers</a>
+
+       </div>
+
+    </li>
+
+ <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-bs-toggle="dropdown"
+           aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-filter"></i> Filter
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                <a class="dropdown-item" asp-controller="Admin" asp-action="FilterUsers"><i></i> Users</a>
+                <a class="dropdown-item" asp-controller="Admin" asp-action="FilterAdmin"><i></i> Admins</a>
+            </div>
+
+        </li>
+    <li class="nav-item">
+
+
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Users", new { area = "" })">
+                <button id ="logout"  type="submit" class="btn btn-outline-danger my-2 my-sm-0">
+                    <i class="bi bi-box-arrow-in-right"></i> Log Out
+                </button>
+            </form>
+    </li>
+       
+}
+
+</ul>
+
+<style>
+    #manage {
+        color: #808080; 
+    }
+
+</style>

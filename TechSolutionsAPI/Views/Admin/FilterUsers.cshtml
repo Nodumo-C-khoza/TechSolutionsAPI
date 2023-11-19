@@ -1,0 +1,105 @@
+﻿@model List<UserViewModel>
+
+<h1>User List</h1>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+
+        <a href="#" id="sortByName" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i> Sort by Name</a>
+        <a href="#" id="sortBySurname" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i> Sort by Surname</a>
+        <a href="#" id="sortByEmail" class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i> Sort by Email</a>
+
+
+        <table class="table" id="userTable">
+            <!-- Add ID here -->
+            <thead>
+                <tr>
+                    <th style="padding: 10px;">First Name</th>
+                    <th style="padding: 10px;">Last Name</th>
+                    <th style="padding: 10px;">Email</th>
+                    <th style="padding: 40px;">Actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelitem => item.FirstName)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelitem => item.LastName)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelitem => item.Email)
+                        </td>
+                        <td class="align-middle">
+                            <div class="btn-group">
+                                <a href="@Url.Action("EditUser", "Admin", new { id = item.Id })" class="btn btn-outline-primary">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+
+                                <a href="@Url.Action("DeleteUser", "Admin", new { id = item.Id })" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="position: fixed; right: 25px; bottom: 25px" class="text-white">
+    <a asp-controller="Admin" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New User</a>
+</div>
+
+@section scripts{
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI/tf1ytAeXN6ZlS5n3afJZ1l1fP/JnyU5dX51lU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Function to handle sorting
+            function sortTable(columnIndex) {
+                var table, rows, switching, i, x, y, shouldSwitch;
+                table = document.getElementById("userTable");
+                switching = true;
+
+                while (switching) {
+                    switching = false;
+                    rows = table.rows;
+
+                    for (i = 1; i < (rows.length - 1); i++) {
+                        shouldSwitch = false;
+                        x = rows[i].getElementsByTagName("TD")[columnIndex];
+                        y = rows[i + 1].getElementsByTagName("TD")[columnIndex];
+
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+
+                    if (shouldSwitch) {
+                        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                        switching = true;
+                    }
+                }
+            }
+
+            // Event handlers for sorting buttons
+            $("#sortByName").click(function () {
+                sortTable(0); // Assuming the first column is the Name column
+            });
+
+            $("#sortBySurname").click(function () {
+                sortTable(1); // Assuming the second column is the Surname column
+            });
+
+            $("#sortByEmail").click(function () {
+                sortTable(2); // Assuming the third column is the Email column
+            });
+        });
+    </script>
+}

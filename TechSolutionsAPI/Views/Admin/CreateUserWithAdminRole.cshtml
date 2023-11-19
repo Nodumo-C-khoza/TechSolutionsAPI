@@ -1,0 +1,69 @@
+﻿@model CreateUserViewModel
+
+@{
+    ViewData["Title"] = "Create User with Admin Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create User with Admin Role</h1>
+<h1>Create User</h1>
+
+<div class="row text">
+    <div class="col-md-8 offset-2">
+        <h4> Add a new brand</h4>
+
+        <form asp-action="CreateUserWithAdminRole">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group text-center">
+                <img class="border-info rounded-circle" style="max-width:150px" id="LogoUrlPreview" />
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+
+                <input asp-for="Roles" type="hidden" value="Admin" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword" class="control-label"></label>
+                <input asp-for="ConfirmPassword" class="form-control" />
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+          
+
+            
+
+           
+            <div class="form-group mt-3">
+                <input type="submit" value="Create" class="btn btn-outline-success" style="float:right;" />
+                <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="Index">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

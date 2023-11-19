@@ -1,0 +1,97 @@
+﻿@using TechSolutionsAPI.Areas.Identity.Data;
+
+@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<h1>Edit User</h1>
+
+@if (Model != null)
+{
+    <div class="row text">
+        <div class="col-md-8 offset-2">
+            <h4> Detail for @Model.FirstName  @Model.LastName</h4>
+
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group text-center">
+                <img style="max-width:350px" id="LogoUrlPreview" />
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                    <input asp-for="FirstName" class="form-control " />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                    <input asp-for="LastName" class="form-control " />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control "/>
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+  
+            
+                <div class="form-group" >
+                   @* <label asp-for="PasswordHash" class="control-label" >Please enter your password for confirmation</label>*@
+                    <input asp-for="PasswordHash" class="form-control" placeholder="Password for Confirmation" type="hidden" />
+                    <span asp-validation-for="PasswordHash" class="text-danger"></span>
+                </div>
+
+            
+            <div class="form-group mt-3">
+                <input type="submit" value="Update" class="btn btn-outline-success" style="float:right;" />
+                <a class="btn btn-outline-secondary" asp-action="Index">Back</a>
+            </div>
+
+            </form>
+        </div>
+    </div>
+
+}
+else
+{
+
+    <p> Details was not found :( </p>
+}
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            // Check if the form was submitted successfully
+            var isSuccess = @ViewData["IsSuccess"];
+
+            // If the form was submitted successfully, show the success alert
+            if (isSuccess) {
+                $("#success-alert").show();
+            }
+        });
+    </script>
+
+    <script>
+    $(document).ready(function () {
+        // Check if the form was submitted successfully
+        var isSuccess = @ViewData["IsSuccess"];
+
+        // If the form was submitted successfully, show a simple alert
+        if (isSuccess) {
+            alert("Details successfully updated.");
+        }
+    });
+</script>
+   
+
+}
+
+
+
+
+

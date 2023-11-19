@@ -1,0 +1,55 @@
+﻿@using TechSolutionsAPI.Areas.Identity.Data;
+
+
+@model ApplicationUser
+
+@{
+    ViewData["Title"] = "Delete User";
+}
+
+<h1>Delete User</h1>
+
+@if (Model != null)
+{
+    <div class="row text">
+        <div class="col-md-8 offset-2">
+            <h4> Delete Action Confirmation For @Model.FirstName @Model.LastName</h4>
+
+          
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control " readonly />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" readonly />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email" class="control-label">Email </label>
+                <input asp-for="Email" class="form-control" readonly />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-3">
+                <form asp-action="DeleteUser">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="submit" value="Confirm" class="btn btn-danger" style="float:right" />
+                </form>
+                <a class="btn btn-outline-secondary" asp-controller="Admin" asp-action="FilterUsers">Back</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <p>The user details could not be found :( </p>
+}
+
+
+
+
+
+

@@ -1,0 +1,58 @@
+﻿@using TechSolutionsAPI.Areas.Identity.Data;
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
+
+@model List<ApplicationUser>
+
+@{
+    ViewData["Title"] = "User List";
+}
+
+<h1>User List</h1>
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th style="padding: 10px;">First Name</th>
+                    <th style="padding: 10px;">Last Name</th>
+                    <th style="padding: 10px;">Email</th>
+                    <th style="padding: 40px;">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelitem => item.FirstName)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelitem => item.LastName)
+                        </td>
+                        <td class="align-middle">
+                            @Html.DisplayFor(modelitem => item.Email)
+                        </td>
+                        
+                        <td class="align-middle">
+                            <div class="btn-group">
+                                <a href="@Url.Action("Edit", "Admin", new { id = item.Id })" class="btn btn-outline-primary">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>
+                     
+                                <a href="@Url.Action("Delete", "Admin", new { id = item.Id })" class="btn btn-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div style="position: fixed; right: 25px; bottom: 25px" class="text-white">
+    <a asp-controller="Admin" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i> Add New User</a>
+</div>
