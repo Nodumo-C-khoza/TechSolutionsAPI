@@ -22,7 +22,7 @@ namespace TechSolutionsAPI.Areas.Identity.Data
                 UserName = "Admin@gmail.com",
                 Email = "Admin@gmail.com",
                 FirstName = "Nodumo",
-                 LastName = "Khoza",
+                LastName = "Khoza",
                 EmailConfirmed = true,
                 PhoneNumberConfirmed = true
             };
